@@ -1,12 +1,17 @@
-function combinationSum4(nums, target) {
-  const dp = new Array(target + 1).fill(0);
-  dp[0] = 1;
-  for (let i = 1; i <= target; i++) {
-    for (const num of nums) {
-      if (i >= num) {
-        dp[i] += dp[i - num];
-      }
-    }
+function isIsomorphic(s, t) {
+  if (s.length !== t.length) return false;
+  const sMap = new Map();
+  const tMap = new Map();
+  for (let i = 0; i < s.length; i++) {
+    const sChar = s[i];
+    const tChar = t[i];
+    if (
+      (sMap.has(sChar) && sMap.get(sChar) !== tChar) ||
+      (tMap.has(tChar) && tMap.get(tChar) !== sChar)
+    )
+      return false;
+    sMap.set(sChar, tChar);
+    tMap.set(tChar, sChar);
   }
-  return dp[target];
+  return true;
 }
