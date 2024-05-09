@@ -1,10 +1,17 @@
-function findTheDifference(s, t) {
-  let result = 0;
-  for (const char of s) {
-    result ^= char.charCodeAt(0);
+function combinationSum(candidates, target) {
+  const result = [];
+  backtrack([], 0, 0);
+  return result;
+  function backtrack(combination, start, sum) {
+    if (sum === target) {
+      result.push([...combination]);
+      return;
+    }
+    if (sum > target) return;
+    for (let i = start; i < candidates.length; i++) {
+      combination.push(candidates[i]);
+      backtrack(combination, i, sum + candidates[i]);
+      combination.pop();
+    }
   }
-  for (const char of t) {
-    result ^= char.charCodeAt(0);
-  }
-  return String.fromCharCode(result);
 }
